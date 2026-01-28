@@ -17,7 +17,9 @@ def resolve_target(target):
         return f"Error: Could not resolve '{target}'. Check your connection or the address."
 
 
-my_nat_ip_addr = '192.168.1.191'
+my_nat_ip_addr = re.findall(
+    r'192\.[^\s]*', str(sub.run(['ifconfig'], capture_output=True).stdout))[0]
+
 cached_hosts = {}
 allowed_countries = {'IR'}
 bufsize = 10000
